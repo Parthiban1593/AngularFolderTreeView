@@ -34,9 +34,9 @@
               <!-- This is the tree node template for leaf nodes -->
               <cdk-nested-tree-node *cdkTreeNodeDef="let node" class="example-tree-node">
                 <!-- use a disabled button to provide padding for tree leaf -->
-                <div class="flex flex-row items-center p-2">
+                <div class="flex flex-row items-center p-2 treeNode" [ngClass]="{'treeNodeOnActive':menuTrigger.menuOpen}">
                   <button  disabled></button>
-                  <mat-icon [style.color]="node.iconColor">{{node.iconName}}</mat-icon><span class="pl-2" #menuTrigger="matMenuTrigger" [matMenuTriggerFor]="menu" (click)="$event.preventDefault()" (contextmenu)="$event.preventDefault();menuTrigger.openMenu()">{{node.name}}</span>
+                  <mat-icon [style.color]="node.iconColor">{{node.iconName}}</mat-icon><span class="pl-2" (contextmenu)="onContextMenu($event, node,menuTrigger)">{{node.name}}</span>
                   <mat-menu #menu="matMenu">
                     <button mat-menu-item><mat-icon [color]="'#ccc'">info</mat-icon>Info</button>
                     <button mat-menu-item><mat-icon [color]="'#ccc'">supervisor_account</mat-icon>Share</button>
@@ -44,17 +44,22 @@
                     <button mat-menu-item><mat-icon [color]="'#ccc'">add</mat-icon>Node</button>
                     <button mat-menu-item><mat-icon [color]="'#ccc'">arrow_forward</mat-icon>Move to</button>
                   </mat-menu>
+                  <div style="visibility: hidden; position: fixed"
+                          [style.left]="contextMenuPosition.x"
+                          [style.top]="contextMenuPosition.y"
+                          [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger">
+                  </div>
                 </div>
               </cdk-nested-tree-node>
               <!-- This is the tree node template for expandable nodes -->
               <cdk-nested-tree-node *cdkTreeNodeDef="let node; when: hasChild" class="example-tree-node">
-                <div>
-                  <button  [attr.aria-label]="'Toggle ' + node.name" cdkTreeNodeToggle (click)="$event.preventDefault()">
+                <div class="treeNode" [ngClass]="{'treeNodeOnActive':menuTrigger1.menuOpen}">
+                  <button  [attr.aria-label]="'Toggle ' + node.name" cdkTreeNodeToggle>
                     <div class="flex flex-row items-center p-2">
                       <mat-icon class="mat-icon-rtl-mirror">
                         {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
                       </mat-icon>
-                      <mat-icon [style.color]="node.iconColor">{{node.iconName}}</mat-icon><span class="pl-2" #menuTrigger1="matMenuTrigger" [matMenuTriggerFor]="menu" (click)="$event.preventDefault()" (contextmenu)="$event.preventDefault();menuTrigger1.openMenu()">{{node.name}}</span>
+                      <mat-icon [style.color]="node.iconColor">{{node.iconName}}</mat-icon><span class="pl-2" (contextmenu)="onContextMenu($event, node,menuTrigger1)"  >{{node.name}}</span>
                       <mat-menu #menu="matMenu">
                         <button mat-menu-item><mat-icon [color]="'#ccc'">info</mat-icon>Info</button>
                         <button mat-menu-item><mat-icon [color]="'#ccc'">supervisor_account</mat-icon>Share</button>
@@ -62,6 +67,11 @@
                         <button mat-menu-item><mat-icon [color]="'#ccc'">add</mat-icon>Node</button>
                         <button mat-menu-item><mat-icon [color]="'#ccc'">arrow_forward</mat-icon>Move to</button>
                       </mat-menu>
+                      <div style="visibility: hidden; position: fixed"
+                          [style.left]="contextMenuPosition.x"
+                          [style.top]="contextMenuPosition.y"
+                          [matMenuTriggerFor]="menu" #menuTrigger1="matMenuTrigger">
+                      </div>
                     </div>
                   </button>
     
@@ -83,9 +93,9 @@
               <!-- This is the tree node template for leaf nodes -->
               <cdk-nested-tree-node *cdkTreeNodeDef="let node" class="example-tree-node">
                 <!-- use a disabled button to provide padding for tree leaf -->
-                <div class="flex flex-row items-center p-2">
+                <div class="flex flex-row items-center p-2 treeNode" [ngClass]="{'treeNodeOnActive':menuTrigger2.menuOpen}">
                   <button  disabled></button>
-                  <mat-icon [style.color]="node.iconColor">{{node.iconName}}</mat-icon><span class="pl-2" #menuTrigger2="matMenuTrigger" [matMenuTriggerFor]="menu" (click)="$event.preventDefault()" (contextmenu)="$event.preventDefault();menuTrigger2.openMenu()">{{node.name}}</span>
+                  <mat-icon [style.color]="node.iconColor">{{node.iconName}}</mat-icon><span class="pl-2" (contextmenu)="onContextMenu($event, node,menuTrigger2)">{{node.name}}</span>
                   <mat-menu #menu="matMenu">
                     <button mat-menu-item><mat-icon [color]="'#ccc'">info</mat-icon>Info</button>
                     <button mat-menu-item><mat-icon [color]="'#ccc'">supervisor_account</mat-icon>Share</button>
@@ -93,17 +103,22 @@
                     <button mat-menu-item><mat-icon [color]="'#ccc'">add</mat-icon>Node</button>
                     <button mat-menu-item><mat-icon [color]="'#ccc'">arrow_forward</mat-icon>Move to</button>
                   </mat-menu>
+                  <div style="visibility: hidden; position: fixed"
+                          [style.left]="contextMenuPosition.x"
+                          [style.top]="contextMenuPosition.y"
+                          [matMenuTriggerFor]="menu" #menuTrigger2="matMenuTrigger">
+                  </div>
                 </div>
               </cdk-nested-tree-node>
               <!-- This is the tree node template for expandable nodes -->
               <cdk-nested-tree-node *cdkTreeNodeDef="let node; when: hasChild" class="example-tree-node">
-                <div>
+                <div class="treeNode" [ngClass]="{'treeNodeOnActive':menuTrigger3.menuOpen}">
                   <button  [attr.aria-label]="'Toggle ' + node.name" cdkTreeNodeToggle>
                     <div class="flex flex-row items-center p-2">
                       <mat-icon class="mat-icon-rtl-mirror">
                         {{myFoldersTreeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
                       </mat-icon>
-                      <mat-icon [style.color]="node.iconColor">{{node.iconName}}</mat-icon><span class="pl-2" #menuTrigger3="matMenuTrigger" [matMenuTriggerFor]="menu" (click)="$event.preventDefault()" (contextmenu)="$event.preventDefault();menuTrigger3.openMenu()">{{node.name}}</span>
+                      <mat-icon [style.color]="node.iconColor">{{node.iconName}}</mat-icon><span class="pl-2" (contextmenu)="onContextMenu($event, node,menuTrigger3)">{{node.name}}</span>
                       <mat-menu #menu="matMenu">
                         <button mat-menu-item><mat-icon [color]="'#ccc'">info</mat-icon>Info</button>
                         <button mat-menu-item><mat-icon [color]="'#ccc'">supervisor_account</mat-icon>Share</button>
@@ -111,6 +126,11 @@
                         <button mat-menu-item><mat-icon [color]="'#ccc'">add</mat-icon>Node</button>
                         <button mat-menu-item><mat-icon [color]="'#ccc'">arrow_forward</mat-icon>Move to</button>
                       </mat-menu>
+                      <div style="visibility: hidden; position: fixed"
+                          [style.left]="contextMenuPosition.x"
+                          [style.top]="contextMenuPosition.y"
+                          [matMenuTriggerFor]="menu" #menuTrigger3="matMenuTrigger">
+                      </div>
                     </div>
                   </button>
     
