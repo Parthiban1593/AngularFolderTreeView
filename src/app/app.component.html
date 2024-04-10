@@ -1,0 +1,136 @@
+<div class="flex flex-col h-full">
+    <div class="flex flex-row h-full">
+      <div class="basis-1/5 p-2 flex flex-col flex-1">
+        <div class="p-3 flex flex-col filterNode">
+          <div>
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label>Search</mat-label>
+              <input matInput type="text" placeholder="Search Folders and Node">
+            </mat-form-field>
+          </div>
+          <div class="flex flex-row justify-between gap-1">
+            <div class="basis-1/2">
+              <mat-form-field appearance="outline">
+                <mat-label>Folders</mat-label>
+                <mat-select>
+                  <mat-option>All folders</mat-option>
+                  <mat-option>My folders</mat-option>
+                  <mat-option>Share with me</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="basis-1/2 justify-end flex flex-row items-center">
+              <mat-icon  class="cursor-pointer">router</mat-icon>
+              <mat-icon (click)="addNewFolder()" class="cursor-pointer">create_new_folder</mat-icon>
+            </div>
+          </div>
+        </div>
+        <div class="section-shareWithMe flex flex-col p-2 border-gray-100 border-t-2">
+          <div style="color: grey;" class="text-base p-2">
+            SHARED WITH ME
+          </div>
+          <div class="p-2">
+            <cdk-tree [dataSource]="dataSource" [treeControl]="treeControl">
+              <!-- This is the tree node template for leaf nodes -->
+              <cdk-nested-tree-node *cdkTreeNodeDef="let node" class="example-tree-node">
+                <!-- use a disabled button to provide padding for tree leaf -->
+                <div class="flex flex-row items-center p-2">
+                  <button  disabled></button>
+                  <mat-icon [style.color]="node.iconColor">{{node.iconName}}</mat-icon><span class="pl-2" #menuTrigger="matMenuTrigger" [matMenuTriggerFor]="menu" (click)="$event.preventDefault()" (contextmenu)="$event.preventDefault();menuTrigger.openMenu()">{{node.name}}</span>
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item><mat-icon [color]="'#ccc'">info</mat-icon>Info</button>
+                    <button mat-menu-item><mat-icon [color]="'#ccc'">supervisor_account</mat-icon>Share</button>
+                    <button mat-menu-item (click)="addNewFolder()"><mat-icon [color]="'#ccc'">add</mat-icon>Folder</button>
+                    <button mat-menu-item><mat-icon [color]="'#ccc'">add</mat-icon>Node</button>
+                    <button mat-menu-item><mat-icon [color]="'#ccc'">arrow_forward</mat-icon>Move to</button>
+                  </mat-menu>
+                </div>
+              </cdk-nested-tree-node>
+              <!-- This is the tree node template for expandable nodes -->
+              <cdk-nested-tree-node *cdkTreeNodeDef="let node; when: hasChild" class="example-tree-node">
+                <div>
+                  <button  [attr.aria-label]="'Toggle ' + node.name" cdkTreeNodeToggle (click)="$event.preventDefault()">
+                    <div class="flex flex-row items-center p-2">
+                      <mat-icon class="mat-icon-rtl-mirror">
+                        {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                      </mat-icon>
+                      <mat-icon [style.color]="node.iconColor">{{node.iconName}}</mat-icon><span class="pl-2" #menuTrigger1="matMenuTrigger" [matMenuTriggerFor]="menu" (click)="$event.preventDefault()" (contextmenu)="$event.preventDefault();menuTrigger1.openMenu()">{{node.name}}</span>
+                      <mat-menu #menu="matMenu">
+                        <button mat-menu-item><mat-icon [color]="'#ccc'">info</mat-icon>Info</button>
+                        <button mat-menu-item><mat-icon [color]="'#ccc'">supervisor_account</mat-icon>Share</button>
+                        <button mat-menu-item (click)="addNewFolder()"><mat-icon [color]="'#ccc'">add</mat-icon>Folder</button>
+                        <button mat-menu-item><mat-icon [color]="'#ccc'">add</mat-icon>Node</button>
+                        <button mat-menu-item><mat-icon [color]="'#ccc'">arrow_forward</mat-icon>Move to</button>
+                      </mat-menu>
+                    </div>
+                  </button>
+    
+                  <div [class.example-tree-invisible]="!treeControl.isExpanded(node)">
+                    <ng-container cdkTreeNodeOutlet></ng-container>
+                  </div>
+                </div>
+                
+              </cdk-nested-tree-node>
+            </cdk-tree>
+          </div>
+        </div>
+        <div class="section-myFolders flex flex-col p-2 border-gray-100 border-t-2">
+          <div style="color: grey;" class="text-base p-2">
+            MY FOLDERS
+          </div>
+          <div class="p-2" *ngIf="myFoldersHierachy.length">
+            <cdk-tree [dataSource]="myFoldersDataSource" [treeControl]="myFoldersTreeControl">
+              <!-- This is the tree node template for leaf nodes -->
+              <cdk-nested-tree-node *cdkTreeNodeDef="let node" class="example-tree-node">
+                <!-- use a disabled button to provide padding for tree leaf -->
+                <div class="flex flex-row items-center p-2">
+                  <button  disabled></button>
+                  <mat-icon [style.color]="node.iconColor">{{node.iconName}}</mat-icon><span class="pl-2" #menuTrigger2="matMenuTrigger" [matMenuTriggerFor]="menu" (click)="$event.preventDefault()" (contextmenu)="$event.preventDefault();menuTrigger2.openMenu()">{{node.name}}</span>
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item><mat-icon [color]="'#ccc'">info</mat-icon>Info</button>
+                    <button mat-menu-item><mat-icon [color]="'#ccc'">supervisor_account</mat-icon>Share</button>
+                    <button mat-menu-item (click)="addNewFolder()"><mat-icon [color]="'#ccc'">add</mat-icon>Folder</button>
+                    <button mat-menu-item><mat-icon [color]="'#ccc'">add</mat-icon>Node</button>
+                    <button mat-menu-item><mat-icon [color]="'#ccc'">arrow_forward</mat-icon>Move to</button>
+                  </mat-menu>
+                </div>
+              </cdk-nested-tree-node>
+              <!-- This is the tree node template for expandable nodes -->
+              <cdk-nested-tree-node *cdkTreeNodeDef="let node; when: hasChild" class="example-tree-node">
+                <div>
+                  <button  [attr.aria-label]="'Toggle ' + node.name" cdkTreeNodeToggle>
+                    <div class="flex flex-row items-center p-2">
+                      <mat-icon class="mat-icon-rtl-mirror">
+                        {{myFoldersTreeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                      </mat-icon>
+                      <mat-icon [style.color]="node.iconColor">{{node.iconName}}</mat-icon><span class="pl-2" #menuTrigger3="matMenuTrigger" [matMenuTriggerFor]="menu" (click)="$event.preventDefault()" (contextmenu)="$event.preventDefault();menuTrigger3.openMenu()">{{node.name}}</span>
+                      <mat-menu #menu="matMenu">
+                        <button mat-menu-item><mat-icon [color]="'#ccc'">info</mat-icon>Info</button>
+                        <button mat-menu-item><mat-icon [color]="'#ccc'">supervisor_account</mat-icon>Share</button>
+                        <button mat-menu-item (click)="addNewFolder()"><mat-icon [color]="'#ccc'">add</mat-icon>Folder</button>
+                        <button mat-menu-item><mat-icon [color]="'#ccc'">add</mat-icon>Node</button>
+                        <button mat-menu-item><mat-icon [color]="'#ccc'">arrow_forward</mat-icon>Move to</button>
+                      </mat-menu>
+                    </div>
+                  </button>
+    
+                  <div [class.example-tree-invisible]="!myFoldersTreeControl.isExpanded(node)">
+                    <ng-container cdkTreeNodeOutlet></ng-container>
+                  </div>
+                </div>
+                
+              </cdk-nested-tree-node>
+            </cdk-tree>
+          </div>
+          <div *ngIf="!myFoldersHierachy.length" class="pt-3 text-center">
+            <button mat-stroked-button (click)="addNewFolder()"><mat-icon class="pr-1">add</mat-icon>Add Folder</button>
+          </div>
+        </div>
+
+       
+      </div>
+      <div class="basis-4/5 flex flex-1 flex-col justify-center items-center">
+        <img src="assets/images/parking_view.png" />
+      </div>
+    </div>
+</div>
