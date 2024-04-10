@@ -1,0 +1,13 @@
+<div class="flex flex-1 flex-col">
+    <h1 mat-dialog-title class="pb-2">Add Folder</h1>
+    <div mat-dialog-content>
+        <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Folder Name</mat-label>
+            <input matInput [formControl]="folderName">
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions class="flex justify-end">
+        <button mat-button mat-dialog-close >Cancel</button>
+        <button mat-button cdkFocusInitial (click)="onSaveFolder()">Save</button>
+    </div>
+</div>
