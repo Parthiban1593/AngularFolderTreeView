@@ -68,6 +68,7 @@ export class AppComponent {
   dataSource = new ArrayDataSource(this.folderHierarchy);
   myFoldersTreeControl = new NestedTreeControl<FolderNode>(node => node.children);
   myFoldersDataSource = new ArrayDataSource(this.myFoldersHierachy);
+  contextMenuPosition = { x: '0px', y: '0px' };
 
   hasChild = (_: number, node: FolderNode) => !!node.children && node.children.length > 0;
   title = 'FolderStructureDemo';
@@ -94,10 +95,14 @@ export class AppComponent {
     });
   }
 
-  
-  openMenu(event: MouseEvent) {
-    event.preventDefault(); // Prevent the default browser context menu
-    this.menuTrigger.openMenu(); // Open the mat-menu
+  onContextMenu(event: MouseEvent, item: any,contextMenu: MatMenuTrigger ) {
+    event.preventDefault();
+    this.contextMenuPosition.x = event.clientX + 'px';
+    this.contextMenuPosition.y = event.clientY + 'px';
+    contextMenu.menuData = { 'item': item };
+    contextMenu.menu.focusFirstItem('mouse');
+    contextMenu.openMenu();
   }
+  
 
 }
