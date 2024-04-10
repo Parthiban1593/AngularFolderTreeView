@@ -5,7 +5,7 @@
           <div>
             <mat-form-field appearance="outline" class="w-full">
               <mat-label>Search</mat-label>
-              <input matInput type="text" placeholder="Search Folders and Node">
+              <input matInput type="text" [formControl]="searchFolderOrNode" placeholder="Search Folders and Node">
             </mat-form-field>
           </div>
           <div class="flex flex-row justify-between gap-1">
@@ -32,7 +32,7 @@
           <div class="p-2">
             <cdk-tree [dataSource]="dataSource" [treeControl]="treeControl">
               <!-- This is the tree node template for leaf nodes -->
-              <cdk-nested-tree-node *cdkTreeNodeDef="let node" class="example-tree-node">
+              <cdk-nested-tree-node *cdkTreeNodeDef="let node" class="example-tree-node" >
                 <!-- use a disabled button to provide padding for tree leaf -->
                 <div class="flex flex-row items-center p-2 treeNode" [ngClass]="{'treeNodeOnActive':menuTrigger.menuOpen}">
                   <button  disabled></button>
