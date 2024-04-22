@@ -1,8 +1,41 @@
 <div class="flex flex-1 flex-col shareFolderContainer">
     <h1 mat-dialog-title class="pb-2">Info</h1>
     <div class="flex-col flex flex-1 gap-3">
-        <div>
-            
+        <div class="">
+            <div class="flex flex-row items-center p-2 folder-name"><mat-icon span class="ml-2">folder_shared</mat-icon><span class="pl-2">{{folderData?.label}}</span></div>
+        </div>
+        <div class="flex-row flex basis-full">
+            <div class="flex-col flex basis-1/2 gap-1">
+                <div>Created By</div>
+                <div>{{folderDetails.createdBy}}</div>
+            </div>
+            <div class="flex-col flex basis-1/2 gap-1">
+                <div>Created On</div>
+                <div>{{folderDetails.createdOn}}</div>
+            </div>
+        </div>
+        <div class="flex-row flex basis-full">
+            <div class="flex-col flex basis-1/2 gap-1">
+                <div>Last Updated By</div>
+                <div>{{folderDetails.lastUpdatedBy}}</div>
+            </div>
+            <div class="flex-col flex basis-1/2 gap-1">
+                <div>Last Updated On</div>
+                <div>{{folderDetails.lastUpdatedOn}}</div>
+            </div>
+        </div>
+        <div class="flex-row flex basis-full">
+            <div class="flex-col flex basis-1/2 gap-1">
+                <div>Shared By</div>
+                <div>{{folderDetails.sharedBy}}</div>
+            </div>
+            <div class="flex-col flex basis-1/2 gap-1">
+                <div>Shared On</div>
+                <div>{{folderDetails.sharedOn}}</div>
+            </div>
+        </div>
+        <div class="flex-col flex gap-1">
+            <div>Shared As</div>
         </div>
     </div>
     <div mat-dialog-actions class="flex justify-end">

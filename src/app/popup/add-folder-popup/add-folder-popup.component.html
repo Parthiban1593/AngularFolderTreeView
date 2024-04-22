@@ -1,13 +1,45 @@
 <div class="flex flex-1 flex-col">
-    <h1 mat-dialog-title class="pb-2">Add Folder</h1>
-    <div mat-dialog-content>
-        <mat-form-field appearance="outline" class="w-full">
-            <mat-label>Folder Name</mat-label>
-            <input matInput [formControl]="folderName">
-        </mat-form-field>
+    <h1 mat-dialog-title class="pb-2" *ngIf="dialogData.type=='addFolder'">Add Folder</h1>
+    <h1 mat-dialog-title class="pb-2" *ngIf="dialogData.type=='addNode'">Add Nodes to Folder</h1>
+    <div class="flex-col flex gap-2 mb-2">
+        <div *ngIf="dialogData.type=='addFolder'">
+            <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Folder Name</mat-label>
+                <input matInput [formControl]="folderName">
+            </mat-form-field>
+        </div>
+        <div>
+            <ng-select
+            [items]="nodes"
+            [multiple]="true"
+            bindLabel="label"
+            [appendTo]="'body'"
+            groupBy="groupName"
+            [placeholder]="'Select Nodes'"
+            [selectableGroup]="true"
+            [selectableGroupAsModel]="false"
+            [closeOnSelect]="false"
+            bindValue="key"
+            [formControl]="selectedNodes">
+            <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+                <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"/> {{item.groupName}}
+            </ng-template>
+            <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"/> {{item.label}}
+            </ng-template>
+            </ng-select>
+        </div>
+        <div *ngIf="dialogData.type=='addNode'">
+            <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Select Folder</mat-label>
+                <mat-select [formControl]="existingFolder">
+                  <mat-option *ngFor="let folder of folders" [value]="folder.key">{{folder.label}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+        </div>        
     </div>
     <div mat-dialog-actions class="flex justify-end">
-        <button mat-button mat-dialog-close >Cancel</button>
-        <button mat-button cdkFocusInitial (click)="onSaveFolder()">Save</button>
+        <button mat-flat-button color="accent" mat-dialog-close>Cancel</button>
+        <button mat-flat-button color="primary" (click)="onSaveFolder()">Save</button>
     </div>
 </div>
