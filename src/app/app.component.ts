@@ -140,7 +140,7 @@ export class AppComponent {
   addNewFolder(node?: FolderNode | null,view? :string): void {
     const dialogRef = this.dialog.open(AddFolderPopupComponent, {
       width: '450px',
-      data : {type : view,items : node}
+      data : {type : view,item : node}
     });
     this.selectedNode = node || null;
     dialogRef.afterClosed().subscribe((result: any) => {
@@ -260,6 +260,14 @@ export class AppComponent {
         }
       }
     });
+  }
+
+  deleteFolder(node : FolderNode){
+    this.myFoldersDataSource.remove(node);
+  }
+
+  editFolder(node : FolderNode){
+    this.addNewFolder(node,"editFolder")
   }
 
 

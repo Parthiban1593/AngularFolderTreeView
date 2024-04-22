@@ -27,7 +27,11 @@ export class AddFolderPopupComponent implements OnInit {
   ngOnInit(): void {
     this.dialogData = this.data;
     this.folders = this.dataService.getFolders();
-    console.log("folders--"+JSON.stringify(this.folders));
+    if(this.dialogData.type == 'editFolder'){
+      this.folderName.setValue(this.dialogData.item.label);
+      console.log(this.dialogData.item.children.map((obj : any)=> obj.key))
+      this.selectedNodes.setValue(this.dialogData.item.children.map((obj : any)=> obj.key))
+    }
   }
 
   onSaveFolder(){

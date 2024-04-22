@@ -113,27 +113,38 @@
               <!-- This is the tree node template for expandable nodes -->
               <mat-nested-tree-node  *matTreeNodeDef="let node; when: hasChild" class="example-tree-node">
                 <div class="treeNode">
-                  <button  [attr.aria-label]="'Toggle ' + node.label" matTreeNodeToggle class="w-full" [ngClass]="{'treeNodeOnActive':menuTrigger3.menuOpen}">
-                    <div class="flex flex-row items-center p-2">
-                      <mat-icon class="mat-icon-rtl-mirror">
-                        {{myFoldersTreeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-                      </mat-icon>
-                      <mat-icon [style.color]="node.iconColor">{{node.iconName}}</mat-icon><span class="pl-2" (contextmenu)="onContextMenu($event, node,menuTrigger3)">{{node.label}}</span>
-                      <mat-menu #menu="matMenu">
-                        <button mat-menu-item (click)="openFolderInfo(node)"><mat-icon [color]="'#ccc'">info</mat-icon>Info</button>
-                        <button mat-menu-item (click)="openShareFolder(node)"><mat-icon [color]="'#ccc'">supervisor_account</mat-icon>Share</button>
-                        <button mat-menu-item (click)="addNewFolder(node,'addFolder')"><mat-icon [color]="'#ccc'">add</mat-icon>Folder</button>
-                        <button mat-menu-item (click)="addNewFolder(node,'addNode')"><mat-icon [color]="'#ccc'">add</mat-icon>Node</button>
-                        <button mat-menu-item><mat-icon [color]="'#ccc'">arrow_forward</mat-icon>Move to</button>
-                      </mat-menu>
-                      <div style="visibility: hidden; position: fixed"
-                          [style.left]="contextMenuPosition.x"
-                          [style.top]="contextMenuPosition.y"
-                          [matMenuTriggerFor]="menu" #menuTrigger3="matMenuTrigger">
+                  <div class="flex flex-row justify-between items-center">
+                    <button  [attr.aria-label]="'Toggle ' + node.label" matTreeNodeToggle class="w-full" [ngClass]="{'treeNodeOnActive':menuTrigger3.menuOpen}">
+                      <div class="flex flex-row items-center p-2">
+                        <mat-icon class="mat-icon-rtl-mirror">
+                          {{myFoldersTreeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                        </mat-icon>
+                        <mat-icon [style.color]="node.iconColor">{{node.iconName}}</mat-icon><span class="pl-2" (contextmenu)="onContextMenu($event, node,menuTrigger3)">{{node.label}}</span>
+                        <mat-menu #menu="matMenu">
+                          <button mat-menu-item (click)="openFolderInfo(node)"><mat-icon [color]="'#ccc'">info</mat-icon>Info</button>
+                          <button mat-menu-item (click)="openShareFolder(node)"><mat-icon [color]="'#ccc'">supervisor_account</mat-icon>Share</button>
+                          <button mat-menu-item (click)="addNewFolder(node,'addFolder')"><mat-icon [color]="'#ccc'">add</mat-icon>Folder</button>
+                          <button mat-menu-item (click)="addNewFolder(node,'addNode')"><mat-icon [color]="'#ccc'">add</mat-icon>Node</button>
+                          <button mat-menu-item><mat-icon [color]="'#ccc'">arrow_forward</mat-icon>Move to</button>
+                        </mat-menu>
+                        
+                        <div style="visibility: hidden; position: fixed"
+                            [style.left]="contextMenuPosition.x"
+                            [style.top]="contextMenuPosition.y"
+                            [matMenuTriggerFor]="menu" #menuTrigger3="matMenuTrigger">
+                        </div>
                       </div>
+                    </button>
+                    <div class="basis-5">
+                      <mat-icon class="cursor-pointer" [matMenuTriggerFor]="moreMenu">more_vert</mat-icon>
+                      <mat-menu #moreMenu="matMenu">
+                        <button mat-menu-item (click)="deleteFolder(node)"><mat-icon [color]="'#ccc'">delete</mat-icon>Delete</button>
+                        <button mat-menu-item (click)="editFolder(node)"><mat-icon [color]="'#ccc'">edit</mat-icon>Edit</button>
+                      </mat-menu>
                     </div>
-                  </button>
-    
+                  </div>
+                  
+                  
                   <div [class.example-tree-invisible]="!myFoldersTreeControl.isExpanded(node)">
                     <ng-container matTreeNodeOutlet></ng-container>
                   </div>
