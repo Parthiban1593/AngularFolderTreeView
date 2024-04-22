@@ -10,6 +10,8 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatTreeModule } from '@angular/material/tree';
 import { MatMenuModule } from '@angular/material/menu';
 import {MatSelectModule} from '@angular/material/select';
+import {MatChipsModule} from '@angular/material/chips';
+
 // Import other Angular Material modules as needed...
 
 @NgModule({
@@ -21,6 +23,7 @@ import {MatSelectModule} from '@angular/material/select';
     MatDialogModule,
     MatCommonModule,
     MatFormFieldModule,
+    MatChipsModule,
     MatInputModule,
     MatTreeModule,
     MatMenuModule,
@@ -38,7 +41,8 @@ import {MatSelectModule} from '@angular/material/select';
     MatInputModule,
     MatTreeModule,
     MatMenuModule,
-    MatSelectModule
+    MatSelectModule,
+    MatChipsModule
     // Add other Angular Material modules here...
   ]
 })

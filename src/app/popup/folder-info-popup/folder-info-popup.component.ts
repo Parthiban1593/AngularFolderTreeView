@@ -15,8 +15,7 @@ export class FolderInfoPopupComponent implements OnInit {
 
   ngOnInit(): void {
     this.folderData = this.data.folder;
-    this.folderDetails.name = this.folderData?.label || "";
-    let obj : FolderDetails = {
+    this.folderDetails = {
       name: this.folderData?.label || "",
       createdBy: 'Isabel Smith',
       createdOn: '12 Oct 2023',

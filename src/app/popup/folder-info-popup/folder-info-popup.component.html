@@ -1,44 +1,54 @@
-<div class="flex flex-1 flex-col shareFolderContainer">
+<div class="flex flex-1 flex-col folderInfoContainer">
     <h1 mat-dialog-title class="pb-2">Info</h1>
     <div class="flex-col flex flex-1 gap-3">
         <div class="">
             <div class="flex flex-row items-center p-2 folder-name"><mat-icon span class="ml-2">folder_shared</mat-icon><span class="pl-2">{{folderData?.label}}</span></div>
         </div>
         <div class="flex-row flex basis-full">
-            <div class="flex-col flex basis-1/2 gap-1">
-                <div>Created By</div>
-                <div>{{folderDetails.createdBy}}</div>
+            <div class="flex-col flex basis-1/2 gap-2">
+                <div class="primary-text text-lg">Created By</div>
+                <div class="">{{folderDetails.createdBy}}</div>
             </div>
-            <div class="flex-col flex basis-1/2 gap-1">
-                <div>Created On</div>
+            <div class="flex-col flex basis-1/2 gap-2">
+                <div class="primary-text text-lg">Created On</div>
                 <div>{{folderDetails.createdOn}}</div>
             </div>
         </div>
         <div class="flex-row flex basis-full">
-            <div class="flex-col flex basis-1/2 gap-1">
-                <div>Last Updated By</div>
+            <div class="flex-col flex basis-1/2 gap-2">
+                <div class="primary-text text-lg">Last Updated By</div>
                 <div>{{folderDetails.lastUpdatedBy}}</div>
             </div>
-            <div class="flex-col flex basis-1/2 gap-1">
-                <div>Last Updated On</div>
+            <div class="flex-col flex basis-1/2 gap-2">
+                <div class="primary-text text-lg">Last Updated On</div>
                 <div>{{folderDetails.lastUpdatedOn}}</div>
             </div>
         </div>
         <div class="flex-row flex basis-full">
             <div class="flex-col flex basis-1/2 gap-1">
-                <div>Shared By</div>
+                <div class="primary-text text-lg">Shared By</div>
                 <div>{{folderDetails.sharedBy}}</div>
             </div>
             <div class="flex-col flex basis-1/2 gap-1">
-                <div>Shared On</div>
+                <div class="primary-text text-lg">Shared On</div>
                 <div>{{folderDetails.sharedOn}}</div>
             </div>
         </div>
         <div class="flex-col flex gap-1">
-            <div>Shared As</div>
+            <div class="primary-text text-lg">Shared As</div>
+            <div>
+                <mat-chip-list>
+                    <mat-chip>
+                      <!-- <mat-chip-avatar>
+                          <img src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="Photo of a Shiba Inu"/>
+                      </mat-chip-avatar> -->
+                       Operators
+                    </mat-chip>
+                  </mat-chip-list>
+            </div>
         </div>
     </div>
     <div mat-dialog-actions class="flex justify-end">
-        <button mat-stroke-button color="accent" mat-dialog-close >Done</button>
+        <button mat-stroked-button mat-dialog-close >Done</button>
     </div>
 </div>
