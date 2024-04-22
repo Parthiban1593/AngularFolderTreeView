@@ -1,0 +1,97 @@
+{
+    "nodes": [
+        {
+            "key": "a8969608a70a45089703f0bf381099a2",
+            "label": "Genesis Cloud NVR",
+            "iconImg": "https://nxgen-sensor-icons.s3-eu-central-1.amazonaws.com/basic/device.svg",
+            "iconName": "router",
+            "iconColor": "green",
+            "isActive": true,
+            "groupName": "Genesis Cloud NVR",
+            "type": "device",
+            "config": {
+                "deviceType": "nxgcloudnvr"
+            }
+        },
+        {
+            "key": "e8c0c81cabd647b99d8c092df501e676",
+            "label": "Cam 01",
+            "iconImg": "https://nxgen-sensor-icons.s3-eu-central-1.amazonaws.com/basic/camera.svg",
+            "iconName": "videocam",
+            "iconColor": "green",
+            "isActive": true,
+            "groupName": "Essence MyShield",
+            "type": "sensor",
+            "config": {
+                "sensorType": "Camera",
+                "isThermal": false,
+                "AnalyticsConfigured": []
+            }
+        },
+        {
+            "key": "b44a9ffae2eb4b6aa7ca2f6a8f110cfe",
+            "label": "Cam 01",
+            "iconImg": "https://nxgen-sensor-icons.s3-eu-central-1.amazonaws.com/basic/camera.svg",
+            "iconName": "videocam",
+            "iconColor": "green",
+            "isActive": true,
+            "groupName": "Site 2",
+            "type": "sensor",
+            "config": {
+                "sensorType": "camera",
+                "AnalyticsConfigured": null
+            }
+        },
+        {
+            "key": "5e4b64d6de2f47f29f064362bc3d946f",
+            "label": "QND-7012R",
+            "iconImg": "https://nxgen-sensor-icons.s3-eu-central-1.amazonaws.com/basic/camera.svg",
+            "iconName": "videocam",
+            "iconColor": "green",
+            "isActive": true,
+            "groupName": "DO-Recorder",
+            "type": "sensor",
+            "config": {
+                "sensorType": "camera",
+                "isThermal": false,
+                "AnalyticsConfigured": [
+                    "detectPeopleInMask"
+                ]
+            }
+        },
+        {
+            "key": "4b6b1c860bb74f389a7927a1eb572cf4",
+            "label": "QND-7012R",
+            "iconImg": "https://nxgen-sensor-icons.s3-eu-central-1.amazonaws.com/basic/camera.svg",
+            "iconName": "videocam",
+            "iconColor": "green",
+            "isActive": true,
+            "groupName": "DO-Recorder",
+            "type": "sensor",
+            "config": {
+                "sensorType": "camera",
+                "isThermal": false,
+                "AnalyticsConfigured": [
+                    "detectPeopleInMask"
+                ]
+            }
+        },
+        {
+            "key": "0b3db6acdd1241b0898065b66935a1cc",
+            "label": "QND-8011",
+            "iconImg": "https://nxgen-sensor-icons.s3-eu-central-1.amazonaws.com/basic/camera.svg",
+            "iconName": "videocam",
+            "iconColor": "green",
+            "isActive": true,
+            "groupName": "DO-Recorder",
+            "type": "sensor",
+            "config": {
+                "sensorType": "camera",
+                "isThermal": false,
+                "AnalyticsConfigured": [
+                    "detectPeopleInMask"
+                ]
+            }
+        }
+    ]
+}

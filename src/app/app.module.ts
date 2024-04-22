@@ -7,11 +7,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { AddFolderPopupComponent } from './popup/add-folder-popup/add-folder-popup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { SalvoViewPopupComponent } from './popup/salvo-view-popup/salvo-view-popup.component';
+import { ShareFolderPopupComponent } from './popup/share-folder-popup/share-folder-popup.component';
+import { FolderInfoPopupComponent } from './popup/folder-info-popup/folder-info-popup.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AddFolderPopupComponent
+    AddFolderPopupComponent,
+    SalvoViewPopupComponent,
+    ShareFolderPopupComponent,
+    FolderInfoPopupComponent,
   ],
   imports: [
     BrowserModule,
@@ -19,7 +26,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
