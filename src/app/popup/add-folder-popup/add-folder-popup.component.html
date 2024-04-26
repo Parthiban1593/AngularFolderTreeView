@@ -3,13 +3,13 @@
     <h1 mat-dialog-title class="pb-2" *ngIf="dialogData.type=='editFolder'">Edit Folder</h1>
     <h1 mat-dialog-title class="pb-2" *ngIf="dialogData.type=='addNode'">Add Nodes to Folder</h1>
     <div class="flex-col flex gap-2 mb-2">
-        <div *ngIf="dialogData.type=='addFolder' || 'editFolder'">
+        <div *ngIf="dialogData.type=='addFolder' || dialogData.type=='editFolder'">
             <mat-form-field appearance="outline" class="w-full">
                 <mat-label>Folder Name</mat-label>
                 <input matInput [formControl]="folderName">
             </mat-form-field>
         </div>
-        <div>
+        <div *ngIf="dialogData.type !='editFolder'">
             <ng-select
             [items]="nodes"
             [multiple]="true"

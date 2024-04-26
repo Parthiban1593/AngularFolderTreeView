@@ -44,8 +44,9 @@ export class AddFolderPopupComponent implements OnInit {
       obj.iconName = node.iconName;
       obj.label = node.label;
       obj.type = "device";
+      obj.key = node.key;
       obj.children = [];
-      obj.key = this.dataService.generateCustomId()
+      //obj.key = this.dataService.generateCustomId()
       return obj
     })
     obj.folderName = this.folderName.value || this.dataService.getFolderByKey(this.existingFolder.value)?.label;

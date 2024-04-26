@@ -1,11 +1,11 @@
-export interface FolderNode {
-    label: string;
+export class FolderNode {
+    label: string | undefined;
     isShared?: boolean;
-    type: string;
-    iconName: string;
-    iconColor: string;
+    type: string | undefined;
+    iconName: string | undefined;
+    iconColor: string | undefined;
     children?: FolderNode[];
-    key?:string
+    key?:string;
 }
 
 export interface FolderDropdown{
@@ -26,4 +26,15 @@ export interface FolderDetails{
     sharedBy : string,
     sharedOn : string,
     sharedAs : string[]
+}
+
+export class FolderFlatNode{
+    label!: string;
+    isShared?: boolean;
+    type!: string;
+    iconName!: string;
+    iconColor!: string;
+    level!: number;
+    expandable!: boolean;
+    key?:string
 }
