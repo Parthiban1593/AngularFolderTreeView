@@ -10,34 +10,42 @@
             </mat-form-field>
         </div>
         <div *ngIf="dialogData.type !='editFolder'">
-            <ng-select
-            [items]="nodes"
-            [multiple]="true"
-            bindLabel="label"
-            [appendTo]="'body'"
-            groupBy="groupName"
-            [placeholder]="'Select Nodes'"
-            [selectableGroup]="true"
-            [selectableGroupAsModel]="false"
-            [closeOnSelect]="false"
-            bindValue="key"
-            [formControl]="selectedNodes">
-            <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
-                <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"/> {{item.groupName}}
-            </ng-template>
-            <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
-                <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"/> {{item.label}}
-            </ng-template>
+            <ng-select [items]="nodes" [multiple]="true" bindLabel="label" [appendTo]="'body'" groupBy="groupName"
+                [placeholder]="'Select Nodes'" [selectableGroup]="true" [selectableGroupAsModel]="false"
+                [closeOnSelect]="false" bindValue="key" [formControl]="selectedNodes">
+
+                <ng-template ng-header-tmp>
+                    <div class="flex flex-row justify-between">
+                        <button class="btn btn-link" (click)="onSelectAll()">Select All</button>
+                        <button class="btn btn-link" (click)="onClearAll()">Clear All</button>
+                    </div>
+                </ng-template>
+                <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+                    <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" /> {{item.groupName}}
+                </ng-template>
+                <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                    <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" /> {{item.label}}
+                </ng-template>
+                <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                    <div class="ng-value" *ngFor="let item of items | slice:0:5">
+                        <span class="ng-value-label">
+                            {{getNodeLabel(item)}}</span>
+                        <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                    </div>
+                    <div class="ng-value" *ngIf="items.length > 5">
+                        <span class="ng-value-label">{{items.length - 5}} more...</span>
+                    </div>
+                </ng-template>
             </ng-select>
         </div>
         <div *ngIf="dialogData.type=='addNode'">
             <mat-form-field appearance="outline" class="w-full">
                 <mat-label>Select Folder</mat-label>
                 <mat-select [formControl]="existingFolder">
-                  <mat-option *ngFor="let folder of folders" [value]="folder.key">{{folder.label}}</mat-option>
+                    <mat-option *ngFor="let folder of folders" [value]="folder.key">{{folder.label}}</mat-option>
                 </mat-select>
-              </mat-form-field>
-        </div>        
+            </mat-form-field>
+        </div>
     </div>
     <div mat-dialog-actions class="flex justify-end">
         <button mat-flat-button color="accent" mat-dialog-close>Cancel</button>

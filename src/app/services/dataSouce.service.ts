@@ -60,7 +60,7 @@ export class DataSource {
           }
           //const newItem = { item: name } as unknown as FolderNode;
           if(!parent.children.find((obj: any) => obj.key === childNode.key)){
-            parent.children.push(childNode);
+            parent.children.unshift(childNode);
           }
     }
     this.dataChange.next(this.data);

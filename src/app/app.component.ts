@@ -118,6 +118,7 @@ export class AppComponent {
      database.dataChange.subscribe((data: FolderNode[]) => {
        this.dataSource.data = [];
        this.dataSource.data = data;
+       this.myFoldersHierachy = data;
      });
    }
 
@@ -133,7 +134,8 @@ export class AppComponent {
         this.shareWithMeDataSource.data = shareWithMeFilteredArr;
         myFolderArr = this.filterFolderHierarchy(this.myFoldersHierachy, searchString)
         this.dataSource.data = myFolderArr;
-      } else {
+      }
+       else {
         this.shareWithMeDataSource.data = this.folderHierarchy;
         this.dataSource.data = this.myFoldersHierachy;
       }
@@ -191,6 +193,7 @@ export class AppComponent {
         let folderNode: FolderNode = {} as FolderNode;
         folderNode.label = result.folderName;
         folderNode.iconName = "folder";
+        folderNode.data = {type : "folder"}
         folderNode.iconColor = "#ccc",
         folderNode.type = "folder"
         folderNode.children = result.selectedNodes;
@@ -206,6 +209,7 @@ export class AppComponent {
         let newFolderNode: FolderNode = {
           label: result.folderName,
           iconName: "folder",
+          data : {type : "folder"},
           iconColor: "#ccc",
           type: "folder",
           children: result.selectedNodes,
@@ -291,7 +295,7 @@ export class AppComponent {
 
 
   onContextMenu(event: MouseEvent, item: FolderNode, contextMenu: MatMenuTrigger) {
-    if(item.iconName == "folder" || item.iconName =="folder_shared"){
+    if(item.data?.type == "folder" || item.iconName =="folder_shared"){
       event.preventDefault();
       this.contextMenuPosition.x = event.clientX + 'px';
       this.contextMenuPosition.y = event.clientY + 'px';
@@ -343,6 +347,8 @@ export class AppComponent {
        ? existingNode
        : new FolderFlatNode();
        flatNode.label = node.label;
+       flatNode.data = node.data;
+       flatNode.iconImg = node.iconImg;
        flatNode.iconName = node.iconName;
        flatNode.iconColor = node.iconColor
      flatNode.key = node.key;
@@ -414,9 +420,9 @@ export class AppComponent {
      // Handle drag area
      const percentageX = event.offsetX / event.target.clientWidth;
      const percentageY = event.offsetY / event.target.clientHeight;
-     if (percentageY < 0.25) {
+     if (percentageY < 0.50) {
        this.dragNodeExpandOverArea = 'above';
-     } else if (percentageY > 0.75) {
+     } else if (percentageY > 0.50) {
        this.dragNodeExpandOverArea = 'below';
      } else {
        this.dragNodeExpandOverArea = 'center';
@@ -429,16 +435,17 @@ export class AppComponent {
      if (node !== this.dragNode) {
       let newItem: FolderNode | undefined;
        let flatMapNode = JSON.parse(JSON.stringify(this.flatNodeMap.get(this.dragNode)));
-       if (this.dragNodeExpandOverArea === 'above') {
+       if (this.dragNodeExpandOverArea === 'above' && node.data?.type =="folder") {
         this.database.deleteItem(this.flatNodeMap.get(this.dragNode));
          newItem = this.database.copyPasteItemAbove(flatMapNode, this.flatNodeMap.get(node));
-       } else if (this.dragNodeExpandOverArea === 'below' && node.iconName =="folder") {
+       } else if (node.data?.type =="folder") {
          this.database.deleteItem(this.flatNodeMap.get(this.dragNode));
-         newItem = this.database.copyPasteItemBelow(flatMapNode, this.flatNodeMap.get(node));
-       } else if(node.iconName =="folder"){
-        this.database.deleteItem(this.flatNodeMap.get(this.dragNode));
          newItem = this.database.copyPasteItem(flatMapNode, this.flatNodeMap.get(node));
-       }
+       } 
+      //  else if(node.data?.type =="folder"){
+      //   this.database.deleteItem(this.flatNodeMap.get(this.dragNode));
+      //    newItem = this.database.copyPasteItem(flatMapNode, this.flatNodeMap.get(node));
+      //  }
        if(newItem){
         this.treeControl.expandDescendants(this.nestedNodeMap.get(newItem));
        }

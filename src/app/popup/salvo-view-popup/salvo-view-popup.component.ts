@@ -29,6 +29,9 @@ export class SalvoViewPopupComponent implements OnInit {
       label: this.viewName.value,
       type: 'view',
       iconName: 'view_module',
+      data: {
+        type : "view"
+      },
       iconColor: '#00aec8',
       key : this.dataService.generateCustomId()
     }

@@ -6,15 +6,23 @@ export class FolderNode {
     iconColor: string | undefined;
     children?: FolderNode[];
     key?:string;
+    iconImg? : string;
+    data?: {
+        type: string;
+    } | undefined
 }
 
 export interface FolderDropdown{
     label : string,
     key: string,
     iconName: string;
+    iconImg? : string;
     iconColor: string;
     children?: FolderDropdown[];
-    groupName? : string
+    groupName? : string;
+    data?: {
+        type: string;
+    } | undefined
 }
 
 export interface FolderDetails{
@@ -33,8 +41,12 @@ export class FolderFlatNode{
     isShared?: boolean;
     type!: string;
     iconName!: string;
+    iconImg? : string;
     iconColor!: string;
     level!: number;
     expandable!: boolean;
-    key?:string
+    key?:string;
+    data?: {
+        type: string;
+    } | undefined
 }

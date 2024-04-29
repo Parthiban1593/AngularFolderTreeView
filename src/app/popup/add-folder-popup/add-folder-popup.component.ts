@@ -1,9 +1,10 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import devices from '../../../assets/data/devices.json'
 import { FolderDropdown, FolderNode } from 'src/app/model/folder.model';
 import { DataService } from 'src/app/services/data.service';
+import { NgSelectComponent } from '@ng-select/ng-select';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class AddFolderPopupComponent implements OnInit {
   existingFolder : FormControl = new FormControl("");
   public nodes : any[]= devices.nodes;
   dialogData : any;
+  @ViewChild(NgSelectComponent) ngSelect: NgSelectComponent | undefined;
   folders : FolderDropdown[] = [];
   constructor(
     public dialogRef: MatDialogRef<AddFolderPopupComponent>,
@@ -42,8 +44,10 @@ export class AddFolderPopupComponent implements OnInit {
       let obj : FolderNode= {} as FolderNode;
       obj.iconColor = node.iconColor;
       obj.iconName = node.iconName;
+      obj.data = node.data;
       obj.label = node.label;
       obj.type = "device";
+      obj.iconImg = node.iconImg;
       obj.key = node.key;
       obj.children = [];
       //obj.key = this.dataService.generateCustomId()
@@ -53,4 +57,25 @@ export class AddFolderPopupComponent implements OnInit {
     obj.key = this.existingFolder.value;
     this.dialogRef.close(obj)
   }
+
+  public onSelectAll() {
+    const searchText = this.ngSelect?.searchInput.nativeElement.value;
+    // Filter the list of items based on the search text;
+    let items = this.nodes;
+    if(searchText)
+    items = items.filter(item => item.label.toLowerCase().includes(searchText.toLowerCase()));
+    // Extract keys of filtered items
+    const selected = items.map(item => item.key);
+    this.selectedNodes.patchValue(selected);
+  }
+  
+  public onClearAll() {
+    this.selectedNodes.patchValue([]);
+  }
+
+  getNodeLabel(item : any){
+    return item.label;
+  }
 }
+
+

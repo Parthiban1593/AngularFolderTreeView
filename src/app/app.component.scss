@@ -20,3 +20,10 @@
     border-radius: 3px;
     background: #e0e0e0;
   }
+  .treeViewIcon{
+    height: 1.2rem;
+    width: 1.2rem;
+    display: inline-block;
+    margin-right: 9px;
+    filter: invert(20%) sepia(75%) saturate(5757%) hue-rotate(117deg) brightness(95%) contrast(103%);
+  }
