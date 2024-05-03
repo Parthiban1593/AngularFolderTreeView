@@ -11,6 +11,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { SalvoViewPopupComponent } from './popup/salvo-view-popup/salvo-view-popup.component';
 import { ShareFolderPopupComponent } from './popup/share-folder-popup/share-folder-popup.component';
 import { FolderInfoPopupComponent } from './popup/folder-info-popup/folder-info-popup.component';
+import { ConfirmPopupComponent } from './popup/confirm-popup/confirm-popup.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { FolderInfoPopupComponent } from './popup/folder-info-popup/folder-info-
     SalvoViewPopupComponent,
     ShareFolderPopupComponent,
     FolderInfoPopupComponent,
+    ConfirmPopupComponent,
   ],
   imports: [
     BrowserModule,

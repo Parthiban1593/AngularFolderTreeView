@@ -1,0 +1,11 @@
+<div class="flex flex-1 flex-col">
+    <h1 mat-dialog-title class="pb-2">Confirm</h1>
+    <div mat-dialog-content style="padding-bottom: 15px !important;">
+        <span *ngIf="node?.data?.type != 'folder'">Are you sure you want to delete the node - {{node?.label}}</span>
+        <span *ngIf="node?.data?.type == 'folder'">Are you sure you want to delete the folder - {{node?.label}}</span>
+    </div>
+    <div mat-dialog-actions class="flex justify-end">
+        <button mat-flat-button color="accent" mat-dialog-close >Cancel</button>
+        <button mat-flat-button color="primary" cdkFocusInitial (click)="onConfirm()">Confirm</button>
+    </div>
+</div>

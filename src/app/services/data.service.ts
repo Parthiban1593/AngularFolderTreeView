@@ -7,7 +7,7 @@ import { FolderDropdown } from '../model/folder.model';
 export class DataService {
 
   constructor() { }
-  foldesrMap : Map<string,FolderDropdown> = new Map<string,FolderDropdown>();
+  foldersMap : Map<string,FolderDropdown> = new Map<string,FolderDropdown>();
 
   generateCustomId() {
     const timestamp = new Date().getTime();
@@ -16,19 +16,23 @@ export class DataService {
     return customId;
   }
 
-  setFolders(folderNode : any,existingFolderName? : string){
-    if(existingFolderName){
-      folderNode.groupName = existingFolderName
+  setFolders(folderNode : any,existingFolderName? : string,isdeleteNode : boolean=false){
+    if(isdeleteNode){
+      this.foldersMap.delete(folderNode.key);
+    }else{
+      if(existingFolderName){
+        folderNode.groupName = existingFolderName
+      }
+      this.foldersMap.set(folderNode.key,folderNode);
     }
-    this.foldesrMap.set(folderNode.key,folderNode)
   }
   
   getFolders(){
-    return Array.from(this.foldesrMap.values());
+    return Array.from(this.foldersMap.values());
   }
 
   getFolderByKey(key : string){
-    return this.foldesrMap.get(key);
+    return this.foldersMap.get(key);
   }
 
   

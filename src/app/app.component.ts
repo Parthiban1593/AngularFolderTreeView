@@ -14,6 +14,7 @@ import { SalvoViewPopupComponent } from './popup/salvo-view-popup/salvo-view-pop
 import { ShareFolderPopupComponent } from './popup/share-folder-popup/share-folder-popup.component';
 import { FolderInfoPopupComponent } from './popup/folder-info-popup/folder-info-popup.component';
 import { DataSource } from './services/dataSouce.service';
+import { ConfirmPopupComponent } from './popup/confirm-popup/confirm-popup.component';
 /**
  * Food data with nested structure.
  * Each node has a label and an optiona list of children.
@@ -251,8 +252,8 @@ export class AppComponent {
           })
         }
       }else if (result && node && view =="editFolder") {
-        //let node = this.findNode(this.selectedNode?.key,this.myFoldersDataSource.data);
-        node!.label = result.folderName || "";
+        let parentNode = this.findNode(this.selectedNode?.key || "",this.dataSource.data);
+        parentNode!.label = result.folderName || "";
         // node!.children = [];
         // if(node){
         //   result.selectedNodes.forEach((childNode : any)=>{
@@ -320,7 +321,20 @@ export class AppComponent {
   }
 
   deleteFolder(node : FolderNode){
-    this.database.deleteItem(node);
+
+    const dialogRef = this.dialog.open(ConfirmPopupComponent, {
+      width: '450px',
+      data : {"node" : node}
+    });
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if(result){
+        this.database.deleteItem(node);
+        if(node.data?.type == "folder"){
+          this.dataService.setFolders(node,node.label,true);
+        }
+      }
+    })
+    
   }
 
   editFolder(node : FolderNode){
